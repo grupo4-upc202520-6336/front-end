@@ -5,17 +5,17 @@ export class AgriculturalProducer {
   phone: string;
   dni: string;
 
-  constructor(agriculturalProducer: {
+  constructor(agriculturalProducer?: {
     fullName?: string,
     city?: string,
     country?: string,
     phone?: string,
     dni?: string
   }) {
-    this.fullName = agriculturalProducer.fullName || '';
-    this.city = agriculturalProducer.city || '';
-    this.country = agriculturalProducer.country || '';
-    this.phone = agriculturalProducer.phone || '';
-    this.dni = agriculturalProducer.dni || '';
+    this.fullName = agriculturalProducer?.fullName || '';
+    this.city = agriculturalProducer?.city || '';
+    this.country = agriculturalProducer?.country || '';
+    this.phone = agriculturalProducer?.phone || '';
+    this.dni = agriculturalProducer?.dni || '';
   }
 }

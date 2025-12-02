@@ -13,7 +13,7 @@ export class User {
   ruc: string;
   token: string;
 
-  constructor(user: {
+  constructor(user?: {
     id?: number,
     email?: string,
     password?: string,
@@ -28,18 +28,18 @@ export class User {
     ruc?: string,
     token?: string
   }) {
-    this.id = user.id || 0;
-    this.email = user.email || '';
-    this.password = user.password || '';
-    this.confirmPassword = user.confirmPassword || '';
-    this.roles = user.roles || [];
-    this.fullName = user.fullName || '';
-    this.city = user.city || '';
-    this.country = user.country || '';
-    this.phone = user.phone || '';
-    this.dni = user.dni || '';
-    this.companyName = user.companyName || '';
-    this.ruc = user.ruc || '';
-    this.token = user.token || '';
+    this.id = user?.id || 0;
+    this.email = user?.email || '';
+    this.password = user?.password || '';
+    this.confirmPassword = user?.confirmPassword || '';
+    this.roles = user?.roles || [];
+    this.fullName = user?.fullName || '';
+    this.city = user?.city || '';
+    this.country = user?.country || '';
+    this.phone = user?.phone || '';
+    this.dni = user?.dni || '';
+    this.companyName = user?.companyName || '';
+    this.ruc = user?.ruc || '';
+    this.token = user?.token || '';
   }
 }

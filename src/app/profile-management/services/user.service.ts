@@ -9,7 +9,7 @@ export class UserService extends BaseService<User>{
 
   constructor() {
     super();
-    this.resourceEndpoint = '/users';
+    this.resourceEndpoint = '/api/v1/users';
   }
 
   getUserById(userId : Number){

@@ -1,7 +1,7 @@
-import {SubscriptionEntity} from './subscription.entity';
+import {Subscription} from './subscription.entity';
 
 describe('SubscriptionEntity', () => {
   it('should create an instance', () => {
-    expect(new SubscriptionEntity()).toBeTruthy();
+    expect(new Subscription()).toBeTruthy();
   });
 });

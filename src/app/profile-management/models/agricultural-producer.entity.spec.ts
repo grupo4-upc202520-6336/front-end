@@ -1,7 +1,7 @@
-import {AgriculturalProducerEntity} from './agricultural-producer.entity';
+import {AgriculturalProducer} from './agricultural-producer.entity';
 
 describe('AgriculturalProducerEntity', () => {
   it('should create an instance', () => {
-    expect(new AgriculturalProducerEntity()).toBeTruthy();
+    expect(new AgriculturalProducer()).toBeTruthy();
   });
 });

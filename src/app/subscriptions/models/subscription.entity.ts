@@ -7,7 +7,7 @@ export class Subscription {
   status: string;
   cost: number;
 
-  constructor(subscription: {
+  constructor(subscription?: {
     id?: number,
     plantType?: string,
     userId?: number,
@@ -15,12 +15,12 @@ export class Subscription {
     renewalDate?: string,
     status?: string,
     cost?: number}) {
-    this.id = subscription.id || 0;
-    this.plantType = subscription.plantType || '';
-    this.userId = subscription.userId || 0;
-    this.startDate = subscription.startDate || '';
-    this.renewalDate = subscription.renewalDate || '';
-    this.status = subscription.status || '';
-    this.cost = subscription.cost || 0;
+    this.id = subscription?.id || 0;
+    this.plantType = subscription?.plantType || '';
+    this.userId = subscription?.userId || 0;
+    this.startDate = subscription?.startDate || '';
+    this.renewalDate = subscription?.renewalDate || '';
+    this.status = subscription?.status || '';
+    this.cost = subscription?.cost || 0;
   }
 }

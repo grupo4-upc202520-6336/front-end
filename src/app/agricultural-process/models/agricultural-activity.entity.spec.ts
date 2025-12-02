@@ -1,7 +1,7 @@
-import {AgriculturalActivityEntity} from './agricultural-activity.entity';
+import {AgriculturalActivity} from './agricultural-activity.entity';
 
-describe('AgriculturalActivityEntity', () => {
+describe('AgriculturalActivity', () => {
   it('should create an instance', () => {
-    expect(new AgriculturalActivityEntity()).toBeTruthy();
+    expect(new AgriculturalActivity()).toBeTruthy();
   });
 });

@@ -6,7 +6,7 @@ export class Distributor {
   companyName: string;
   ruc: string;
 
-  constructor(distributor: {
+  constructor(distributor?: {
     fullName?: string,
     city?: string,
     country?: string,
@@ -14,11 +14,11 @@ export class Distributor {
     companyName?: string,
     ruc?: string
   }) {
-    this.fullName = distributor.fullName || '';
-    this.city = distributor.city || '';
-    this.country = distributor.country || '';
-    this.phone = distributor.phone || '';
-    this.companyName = distributor.companyName || '';
-    this.ruc = distributor.ruc || '';
+    this.fullName = distributor?.fullName || '';
+    this.city = distributor?.city || '';
+    this.country = distributor?.country || '';
+    this.phone = distributor?.phone || '';
+    this.companyName = distributor?.companyName || '';
+    this.ruc = distributor?.ruc || '';
   }
 }

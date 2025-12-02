@@ -9,7 +9,7 @@ export class FieldsService extends BaseService<Fields>{
 
   constructor() {
     super();
-    this.resourceEndpoint='/fields'
+    this.resourceEndpoint='/api/v1/fields'
   }
 
   getFieldsByUserId(userId: number) {

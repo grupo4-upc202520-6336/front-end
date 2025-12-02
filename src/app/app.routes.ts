@@ -69,7 +69,7 @@ export const routes: Routes = [
   },
   // Rutas protegidas para ROLE_AGRICULTURAL_PRODUCER
   {
-    path: '',
+    path: 'producer',
     component: HomeAgriculturalProcessComponent,
     canActivate: [isAuthenticatedGuard],
     data: { roles: ['ROLE_AGRICULTURAL_PRODUCER'] },

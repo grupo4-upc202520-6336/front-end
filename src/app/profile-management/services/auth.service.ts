@@ -13,7 +13,8 @@ export class AuthService extends BaseService<User>{
   public authStatus = computed( () => this._authStatus() );
   constructor() {
     super();
-    this.resourceEndpoint = '/authentication';
+    //this.resourceEndpoint = '/authentication';
+    this.resourceEndpoint = '/api/v1/authentication';
     this.checkAuthStatus().subscribe();
   }
 

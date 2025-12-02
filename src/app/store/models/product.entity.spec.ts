@@ -1,7 +1,7 @@
-import {ProductEntity} from './product.entity';
+import {Product} from './product.entity';
 
 describe('ProductEntity', () => {
   it('should create an instance', () => {
-    expect(new ProductEntity()).toBeTruthy();
+    expect(new Product()).toBeTruthy();
   });
 });

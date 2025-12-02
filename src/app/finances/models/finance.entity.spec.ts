@@ -1,7 +1,7 @@
-import { FinanceEntity } from './finance.entity';
+import { Finance } from './finance.entity';
 
 describe('FinanceEntity', () => {
   it('should create an instance', () => {
-    expect(new FinanceEntity()).toBeTruthy();
+    expect(new Finance()).toBeTruthy();
   });
 });

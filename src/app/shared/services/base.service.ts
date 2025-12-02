@@ -16,6 +16,7 @@ export class BaseService<T> {
 
   protected httpOptionsAuthorized = this.createHttpOptions();
 
+  //protected basePath: string = `${environment.serverBasePath}`;
   protected basePath: string = `${environment.serverBasePath}`;
 
   protected resourceEndpoint: string = '/resources';

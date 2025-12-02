@@ -1,7 +1,7 @@
-import {DistributorEntity} from './distributor.entity';
+import {Distributor} from './distributor.entity';
 
 describe('DistributorEntity', () => {
   it('should create an instance', () => {
-    expect(new DistributorEntity()).toBeTruthy();
+    expect(new Distributor()).toBeTruthy();
   });
 });

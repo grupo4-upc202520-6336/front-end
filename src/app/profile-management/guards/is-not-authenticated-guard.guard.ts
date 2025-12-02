@@ -7,20 +7,33 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
+  console.log('Estado:', authService.authStatus());
+  console.log('Roles:', localStorage.getItem('roles'));
+
+
   if (authService.authStatus() === AuthStatus.authenticated) {
-    // Obtener datos del localStorage
-    const roles = JSON.parse(localStorage.getItem('roles') || '[]');
+
+    let roles = [];
+    try {
+      roles = JSON.parse(localStorage.getItem('roles') || '[]');
+    } catch (e) { roles = []; }
+
     const userId = localStorage.getItem('userId');
 
-    // Redirigir según el rol
     if (roles.includes('ROLE_AGRICULTURAL_PRODUCER')) {
       router.navigateByUrl('/fields');
-    } else if (roles.includes('ROLE_DISTRIBUTOR') && userId) {
-      router.navigateByUrl(`/home-distributor/${userId}`);
+      return false;
     }
 
-    return false; // Previene el acceso a la ruta actual
+    if (roles.includes('ROLE_DISTRIBUTOR') && userId) {
+      router.navigateByUrl(`/home-distributor/${userId}`);
+      return false;
+    }
+
+    // Si NO hay roles → no redirigir
+    return true;
   }
+
 
   return true; // Permitir acceso a la ruta si no está autenticado
 };

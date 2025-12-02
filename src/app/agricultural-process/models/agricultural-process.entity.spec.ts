@@ -1,7 +1,7 @@
-import {AgriculturalProcessEntity} from './agricultural-process.entity';
+import {AgriculturalProcess} from './agricultural-process.entity';
 
 describe('AgriculturalProcessEntity', () => {
   it('should create an instance', () => {
-    expect(new AgriculturalProcessEntity()).toBeTruthy();
+    expect(new AgriculturalProcess()).toBeTruthy();
   });
 });
