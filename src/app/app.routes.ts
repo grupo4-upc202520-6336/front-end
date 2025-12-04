@@ -108,7 +108,7 @@ export const routes: Routes = [
       },
       {
         path: 'products-inventory',
-        component: ProductsProducerComponent
+        component: ProductsInventoryComponent
       },
       {
         path: 'finance-view',

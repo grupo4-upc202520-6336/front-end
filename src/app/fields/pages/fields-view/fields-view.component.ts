@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
-import {CardFieldListComponent} from "../../components/card-field-list/card-field-list.component";
+import { Component } from '@angular/core';
+import { CardFieldListComponent } from "../../components/card-field-list/card-field-list.component";
 import {
   NavbarAgriculturalProducerComponent
 } from "../../../public/components/navbar-agricultural-producer/navbar-agricultural-producer.component";
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { FieldsService } from "../../services/fields.service";
+import { Fields } from "../../models/fields.entity";
 
 @Component({
   selector: 'app-fields-view',
@@ -17,14 +19,28 @@ import {TranslateModule} from "@ngx-translate/core";
   styleUrl: './fields-view.component.css'
 })
 export class FieldsViewComponent {
-  userId!: number;
 
-    constructor() {
-        this.getUserIdFromLS();
-    }
+  userId!: number;
+  fields: Fields[] = [];
+
+  constructor(private fieldsService: FieldsService) {
+    this.getUserIdFromLS();
+    this.loadFields();
+  }
 
   getUserIdFromLS() {
-    this.userId = JSON.parse(localStorage.getItem('userId') || '{}');
-    console.log(this.userId);
+    this.userId = JSON.parse(localStorage.getItem('userId') || '0');
+  }
+
+  loadFields() {
+    this.fieldsService.getFieldsByUserId(this.userId).subscribe({
+      next: (response) => {
+        this.fields = response;
+        console.log("FIELDS:", this.fields);
+      },
+      error: (err) => {
+        console.error("Error al cargar fields:", err);
+      }
+    });
   }
 }

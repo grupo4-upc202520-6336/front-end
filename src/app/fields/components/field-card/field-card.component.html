@@ -1,21 +1,19 @@
 <mat-card class="w-96" appearance="outlined">
-  <img mat-card-image src="/assets/img/fields1.png" alt="Photo of a Shiba Inu" (click)="goToHome(field.id)">
+  <img mat-card-image src="/assets/img/fields1.png" alt="Field image" (click)="goToHome(field.id)">
+
   <mat-card-content>
     <h3>{{ 'fields.fieldName' | translate }}: {{ field.fieldName }}</h3>
     <p>{{ 'fields.landSize' | translate }}: {{ field.size }}</p>
     <p>{{ 'fields.location' | translate }}: {{ field.location }}</p>
   </mat-card-content>
+
   <mat-card-actions class="gap-2.5 m-3">
-    <button class="w-20 !bg-green-600 !text-white !rounded" mat-button (click)="openModal()">{{ 'shared.edit' | translate }}:</button>
-    <button hidden="hidden" class="w-20 !bg-green-600 !text-white !rounded" mat-button (click)="onFieldDeleted(field.id)">{{ 'fields.delete' | translate }}:</button>
+    <button class="w-20 !bg-green-600 !text-white !rounded" mat-button (click)="openModal()">
+      {{ 'shared.edit' | translate }}
+    </button>
+
+    <button class="w-20 !bg-red-600 !text-white !rounded" mat-button (click)="onFieldDeleted(field.id)">
+      {{ 'fields.delete' | translate }}
+    </button>
   </mat-card-actions>
 </mat-card>
-
-<app-field-form
-  *ngIf="isModalOpen"
-  [fieldId]="field.id"
-  [currentUserId]="field.producerId"
-  [isModalOpen]="isModalOpen"
-  (close)="closeModal()"
-  (success)="onEditSuccess()"
-></app-field-form>

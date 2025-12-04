@@ -1,12 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Fields} from "../../models/fields.entity";
-import {FieldsService} from "../../services/fields.service";
-import {FieldCardComponent} from "../field-card/field-card.component";
-import {CommonModule} from '@angular/common';
-import {MatButton} from "@angular/material/button";
-import {FieldFormComponent} from "../field-form/field-form.component";
-import {FieldFormEditComponent} from "../field-form-edit/field-form-edit.component";
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Fields } from "../../models/fields.entity";
+import { FieldsService } from "../../services/fields.service";
+import { FieldCardComponent } from "../field-card/field-card.component";
+import { CommonModule } from '@angular/common';
+import { MatButton } from "@angular/material/button";
+import { FieldFormComponent } from "../field-form/field-form.component";
+import { FieldFormEditComponent } from "../field-form-edit/field-form-edit.component";
 
 @Component({
   selector: 'app-card-field-list',
@@ -22,12 +21,17 @@ import {FieldFormEditComponent} from "../field-form-edit/field-form-edit.compone
   styleUrl: './card-field-list.component.css'
 })
 export class CardFieldListComponent implements OnInit {
+
   fields: Array<Fields> = [];
   @Input() currentUserId!: number;
-  isModalOpen: boolean = false;
-  isEditModalOpen: boolean = false; // Nueva variable para manejar el modal de edición
-  selectedFieldId!: number; // ID del campo seleccionado para editar
+
+  isModalOpen = false;
+  isEditModalOpen = false;
+
+  selectedFieldId!: number;
+
   message: string = '';
+
   constructor(private fieldService: FieldsService) {}
 
   ngOnInit(): void {
@@ -37,9 +41,7 @@ export class CardFieldListComponent implements OnInit {
   loadFields(): void {
     this.fieldService.getFieldsByUserId(this.currentUserId).subscribe((fields) => {
       this.fields = fields;
-      if (fields.length === 0) {
-        this.message = 'No fields found';
-      }
+      this.message = fields.length === 0 ? 'No fields found' : '';
     });
   }
 
@@ -56,6 +58,12 @@ export class CardFieldListComponent implements OnInit {
     this.closeModal();
   }
 
+  /** NUEVO: abrir modal de edición */
+  openEditModal(fieldId: number): void {
+    this.selectedFieldId = fieldId;
+    this.isEditModalOpen = true;
+  }
+
   closeEditModal(): void {
     this.isEditModalOpen = false;
   }
@@ -69,4 +77,3 @@ export class CardFieldListComponent implements OnInit {
     this.loadFields();
   }
 }
-

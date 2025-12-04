@@ -1,15 +1,12 @@
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
-import {Fields} from "../../models/fields.entity";
-import {MatCard, MatCardActions, MatCardContent, MatCardImage} from "@angular/material/card";
-import {MatButton} from "@angular/material/button";
-import {FieldsService} from "../../services/fields.service";
-import {NgIf} from "@angular/common";
-
-import {Router} from "@angular/router";
-import {FieldFormComponent} from "../field-form/field-form.component";
-import {AgriculturalProcessService} from "../../../agricultural-process/services/agricultural-process.service";
-import {FieldFormEditComponent} from "../field-form-edit/field-form-edit.component";
-import {TranslateModule} from "@ngx-translate/core";
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Fields } from "../../models/fields.entity";
+import { MatCard, MatCardActions, MatCardContent, MatCardImage } from "@angular/material/card";
+import { MatButton } from "@angular/material/button";
+import { FieldsService } from "../../services/fields.service";
+import { NgIf } from "@angular/common";
+import { Router } from "@angular/router";
+import { FieldFormEditComponent } from "../field-form-edit/field-form-edit.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-field-card',
@@ -21,7 +18,6 @@ import {TranslateModule} from "@ngx-translate/core";
     MatCardActions,
     MatButton,
     NgIf,
-    FieldFormComponent,
     FieldFormEditComponent,
     TranslateModule
   ],
@@ -29,26 +25,34 @@ import {TranslateModule} from "@ngx-translate/core";
   styleUrl: './field-card.component.css'
 })
 export class FieldCardComponent {
+
   @Input() field!: Fields;
+
+  // Eventos hacia el padre
   @Output() deleteField = new EventEmitter<void>();
-  @Output() editField = new EventEmitter<void>();
+  @Output() editField = new EventEmitter<number>();
+
   isModalOpen: boolean = false;
 
   fieldService: FieldsService = inject(FieldsService);
-  agriculturalProcessService: AgriculturalProcessService = inject(AgriculturalProcessService);
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
+  // ----------------------------
+  // 🗑️ ELIMINAR FIELD
+  // ----------------------------
   onFieldDeleted(fieldId: number): void {
-    this.fieldService.delete(fieldId).subscribe((response: any) => {
-      console.log(`Field with ID ${fieldId} deleted successfully.`);
+    this.fieldService.deleteField(fieldId, this.field.producerId).subscribe(() => {
+      console.log(`Field ${fieldId} deleted`);
       this.deleteField.emit();
     });
   }
 
+  // ----------------------------
+  // ✏️ ABRIR FORMULARIO DE EDICIÓN
+  // ----------------------------
   openModal() {
-    this.isModalOpen = true;
+    this.editField.emit(this.field.id);
   }
 
   closeModal() {
@@ -56,61 +60,16 @@ export class FieldCardComponent {
   }
 
   onEditSuccess() {
-    this.editField.emit();
+    this.editField.emit(this.field.id);
     this.closeModal();
   }
 
-  findSeedingActivity(agriculturalProcessId: number) {
-    this.agriculturalProcessService.getActivitiesByAgriculturalProcessId(agriculturalProcessId, "SEEDING")
-      .subscribe({
-        next: (response: any) => {
-          console.log('Seeding activity found:', response);
-          this.router.navigate(['home-agricultural-process', agriculturalProcessId]);
-        },
-        error: (error) => {
-          console.error('Error finding seeding activity:', error);
-          this.router.navigate(["activity-scheduler/Seeding"]);
-        }
-      });
-  }
-
-  createAgriculturalProcess(fieldIdToCreate: number) {
-    let item = {
-      fieldId: fieldIdToCreate
-    }
-    this.agriculturalProcessService.create(item).subscribe({
-      next: (response: any) => {
-        localStorage.setItem('fieldName', this.field.fieldName);
-        localStorage.setItem('fieldId', this.field.id.toString());
-        localStorage.setItem('agriculturalProcessId', response.id);
-        this.findSeedingActivity(response.id);
-      },
-      error: (error) => {
-        console.error('Error creating agricultural process:', error);
-      }
-    })
-  }
-
+  // ----------------------------
+  // 🌱 NAVEGAR AL HOME DEL PROCESO AGRÍCOLA
+  // ----------------------------
   goToHome(fieldId: number) {
-    this.agriculturalProcessService.getUnfinishedAgriculturalProcessByFieldId(fieldId).subscribe({
-      next: (response: any) => {
-        // Verifica si response tiene un ID válido
-        if (response && typeof response.id === 'number' && response.id > 0) {
-          console.log('Proceso agrícola encontrado:', response.status);
-          localStorage.setItem('fieldName', this.field.fieldName);
-          localStorage.setItem('fieldId', this.field.id.toString());
-          localStorage.setItem('agriculturalProcessId', response.id.toString());
-          this.findSeedingActivity(response.id);
-        } else {
-          console.warn('No se encontró un proceso agrícola sin finalizar. Creando uno nuevo.');
-          this.createAgriculturalProcess(fieldId);
-        }
-      },
-      error: (error) => {
-        console.error('Error al obtener el proceso agrícola sin finalizar:', error);
-        // Si ocurre un error, maneja la creación del proceso como respuesta predeterminada
-        this.createAgriculturalProcess(fieldId);
-      }
-    });
+    console.log("Navigating to field:", fieldId);
+
+    this.router.navigate([`/producer/home-agricultural-process/${fieldId}`]);
   }
 }
