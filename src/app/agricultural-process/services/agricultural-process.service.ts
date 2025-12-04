@@ -12,7 +12,7 @@ export class AgriculturalProcessService extends BaseService<AgriculturalProcess>
 
   constructor() {
     super();
-    this.resourceEndpoint = '/agricultural-processes';
+    this.resourceEndpoint = '/api/v1/agricultural-processes';
   }
 
   getLastActivityByType(activityType: String, agriculturalProcessId : number) {

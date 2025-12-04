@@ -8,7 +8,7 @@ export class WorkerService extends BaseService<Worker>{
 
   constructor() {
     super();
-    this.resourceEndpoint = '/workers';
+    this.resourceEndpoint = '/api/v1/workers';
   }
 
   getAllByUserId(producerId: number) {

@@ -10,7 +10,7 @@ export class FinanceService extends BaseService<Finance>{
 
   constructor() {
     super();
-    this.resourceEndpoint = '/finances';
+    this.resourceEndpoint = '/api/v1/finances';
   }
 
   getFinancesByAgriculturalProcessId(agriculturalProcessId: number) {

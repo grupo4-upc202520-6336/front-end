@@ -10,7 +10,7 @@ export class ProductStoredService extends BaseService<ProductStored>{
 
   constructor() {
     super();
-    this.resourceEndpoint = "/payment-products";
+    this.resourceEndpoint = "/api/v1/payment-products";
   }
 
   getAllByOwnerId(ownerId: number) {

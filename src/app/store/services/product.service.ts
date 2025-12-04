@@ -10,7 +10,7 @@ export class ProductService extends BaseService<Product>{
 
   constructor() {
     super();
-    this.resourceEndpoint = '/products';
+    this.resourceEndpoint = '/api/v1/products';
   }
 
   getAllByUserId(userId: number) {

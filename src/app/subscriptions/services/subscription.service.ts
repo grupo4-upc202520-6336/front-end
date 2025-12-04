@@ -9,6 +9,6 @@ export class SubscriptionService extends BaseService<Subscription>{
 
   constructor() {
     super();
-    this.resourceEndpoint = '/subscriptions';
+    this.resourceEndpoint = '/api/v1/subscriptions';
   }
 }
