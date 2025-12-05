@@ -61,12 +61,12 @@ export const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'fields',
-    component: FieldsViewComponent,
-    canActivate: [isAuthenticatedGuard],
-    data: { roles: ['ROLE_AGRICULTURAL_PRODUCER'] },
-  },
+  //{
+  //  path: 'fields',
+  //  component: FieldsViewComponent,
+  //  canActivate: [isAuthenticatedGuard],
+  //  data: { roles: ['ROLE_AGRICULTURAL_PRODUCER'] },
+  //},
   // Rutas protegidas para ROLE_AGRICULTURAL_PRODUCER
   {
     path: 'producer',
@@ -77,6 +77,10 @@ export const routes: Routes = [
       {
         path: 'profile-producer/:id',
         component: ProfilePageComponent,
+      },
+      {
+        path: 'fields',
+        component: FieldsViewComponent,
       },
       {
         path: 'home-agricultural-process/:id',
